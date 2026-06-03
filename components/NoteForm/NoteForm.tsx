@@ -5,7 +5,7 @@ import { useId } from 'react';
 import * as Yup from 'yup';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '@/lib/api';
-import type { NoteFormProps, NoteFormValuesProps, NoteTag } from '@/lib/type';
+import type { NoteFormProps, NoteFormValuesProps, NoteTag } from '@/types/note';
 
 const NoteSchema = Yup.object({
   title: Yup.string()
