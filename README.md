@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NoteHub
+
+A note management application built with Next.js (App Router), featuring SSR with TanStack Query hydration, multi-page routing, and full CRUD functionality.
+
+## Features
+
+- Browse and search notes with debounced input
+- Create notes via a modal form with validation
+- Delete notes
+- View individual note details
+- Server-side rendering with TanStack Query prefetch and cache hydration
+- Global loading and error boundaries
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home page with app info |
+| `/notes` | Notes list with search, pagination, create |
+| `/notes/[id]` | Note detail page |
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) — App Router, SSR
+- [TanStack Query](https://tanstack.com/query) — server state, prefetch, hydration
+- [Axios](https://axios-http.com) — HTTP requests
+- [Formik](https://formik.org) + [Yup](https://github.com/jquense/yup) — form and validation
+- TypeScript, CSS Modules
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root:
+
+```
+NEXT_PUBLIC_NOTEHUB_TOKEN=your_token_here
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/
+  page.tsx                        # Home page (SSR)
+  layout.tsx                      # Root layout with Header, Footer, TanStackProvider
+  loading.tsx                     # Global loading state
+  notes/
+    page.tsx                      # Notes list page (SSR + prefetch)
+    Notes.client.tsx              # Client component with search/pagination logic
+    error.tsx                     # Error boundary for /notes
+    [id]/
+      page.tsx                    # Note detail page (SSR + prefetch)
+      NoteDetails.client.tsx      # Client component for note details
+      error.tsx                   # Error boundary for /notes/[id]
+components/
+  Header/                         # Navigation header
+  Footer/                         # Footer with contact info
+  TanStackProvider/               # QueryClientProvider wrapper
+  NoteList/                       # Notes list with delete and view details
+  NoteForm/                       # Create note form
+  Modal/                          # Portal-based modal
+  SearchBox/                      # Search input
+  Pagination/                     # Pagination control
+  Loader/                         # Loading indicator
+  ErrorMessage/                   # Inline error message
+lib/
+  api.ts                          # API functions (fetchNotes, fetchNoteById, createNote, deleteNote)
+types/
+  note.ts                         # Shared types (Note, NoteTag)
+```
