@@ -5,7 +5,7 @@ import { useId } from 'react';
 import * as Yup from 'yup';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createNote } from '@/lib/api';
-import type { NoteFormValuesProps, NoteTag } from '@/types/note';
+import type { NoteFormValues, NoteTag } from '@/types/note';
 
 interface NoteFormProps {
   onClose: () => void;
@@ -22,7 +22,7 @@ const NoteSchema = Yup.object({
     .required('Required Field'),
 });
 
-const NoteInitialValues: NoteFormValuesProps = {
+const NoteInitialValues: NoteFormValues = {
   title: '',
   content: '',
   tag: 'Todo',
@@ -40,8 +40,8 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     },
   });
   const handleSubmit = async (
-    values: NoteFormValuesProps,
-    formikHelpers: FormikHelpers<NoteFormValuesProps>
+    values: NoteFormValues,
+    formikHelpers: FormikHelpers<NoteFormValues>
   ) => {
     await mutateAsync(values);
     formikHelpers.resetForm();
