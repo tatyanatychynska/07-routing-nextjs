@@ -2,10 +2,13 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteNote } from '@/lib/api';
-import type { Note, NoteListProps } from '@/types/note';
+import type { Note } from '@/types/note';
 import css from './NoteList.module.css';
 import Link from 'next/link';
 
+interface NoteListProps {
+  notes: Note[];
+}
 function NoteList({ notes }: NoteListProps) {
   const queryClient = useQueryClient();
 

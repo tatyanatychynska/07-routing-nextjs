@@ -10,13 +10,9 @@ export interface Note {
 
 export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
-export interface NoteListProps {
-  notes: Note[];
-}
 
-export interface NoteFormProps {
-  onClose: () => void;
-}
+
+
 
 export interface NoteFormValuesProps {
   title: string;
