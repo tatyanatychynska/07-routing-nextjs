@@ -11,9 +11,6 @@ export interface Note {
 export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
 
-
-
-
 export interface NoteFormValues {
   title: string;
   content: string;

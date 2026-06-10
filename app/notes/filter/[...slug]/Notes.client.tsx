@@ -13,7 +13,11 @@ import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import css from './page.module.css';
 
-function App() {
+interface Props {
+  tag?: string;
+}
+
+function App({ tag }: Props) {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,8 +27,8 @@ function App() {
   }, 500);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['notes', query, page],
-    queryFn: () => fetchNotes(query, page, 12),
+    queryKey: ['notes', query, page, tag],
+    queryFn: () => fetchNotes(query, page, 12, tag),
     placeholderData: keepPreviousData,
   });
   const notes = data?.notes ?? [];

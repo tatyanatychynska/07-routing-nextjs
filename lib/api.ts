@@ -20,9 +20,10 @@ export const fetchNotes = async (
   search: string,
   page: number,
   perPage: number,
+  tag?: string,
 ): Promise<FetchNotesResponse> => {
   const {data} = await axios.get<FetchNotesResponse>("/notes", {
-    params: { ...(search && { search }), page, perPage },
+    params: { ...(search && { search }), page, perPage, tag },
   });
   return data;
 };
