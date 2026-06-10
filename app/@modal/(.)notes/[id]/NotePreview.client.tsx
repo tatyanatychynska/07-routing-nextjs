@@ -20,21 +20,23 @@ export default function NotePreviewClient() {
     refetchOnMount: false,
   });
   const router = useRouter();
-  if (isLoading) return <p>Loading, please wait...</p>;
-  if (isError || !note) return <p>Something went wrong.</p>;
 
   return (
     <Modal onClose={() => router.back()}>
-      <div className={css.container}>
-        <div className={css.item}>
-          <div className={css.header}>
-            <h2>{note.title}</h2>
+      {isLoading && <p>Loading, please wait....</p>}
+      {isError && <p>Something went wrong.</p>}
+      {note && (
+        <div className={css.container}>
+          <div className={css.item}>
+            <div className={css.header}>
+              <h2>{note.title}</h2>
+            </div>
+            <p className={css.tag}>{note.tag}</p>
+            <p className={css.content}>{note.content}</p>
+            <p className={css.date}>{note.createdAt}</p>
           </div>
-          <p className={css.tag}>{note.tag}</p>
-          <p className={css.content}>{note.content}</p>
-          <p className={css.date}>{note.createdAt}</p>
         </div>
-      </div>
+      )}
     </Modal>
   );
 }
